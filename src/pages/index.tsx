@@ -8,17 +8,17 @@ import {
 } from '@chakra-ui/react'
 import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
 
-import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
+import Menu from '../components/Menu'
 
 const Index = () => (
-  <Container height="100vh">
-    <Hero />
-    <Main>
+  <Container minHeight="100vh">
+    <Menu />
+    
+    <Main flex={1}>
       <Text>
         Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code> +{' '}
         <Code>typescript</Code>.
@@ -45,11 +45,9 @@ const Index = () => (
       </List>
     </Main>
 
-    <DarkModeSwitch />
-    <Footer>
-      <Text>Next ❤️ Chakra</Text>
+    <Footer >
+      <Text>Feito com ❤️ pelo ScubaTeam</Text>
     </Footer>
-    <CTA />
   </Container>
 )
 
