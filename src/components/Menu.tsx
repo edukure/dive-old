@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 import { Slide } from '@chakra-ui/react';
 import { Flex, Box, HStack, VStack, Circle, Container, Text } from '@chakra-ui/layout';
 import { Image } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useBreakpointValue } from '@chakra-ui/react';
+import { useBreakpointValue, Button } from '@chakra-ui/react';
 
 const MenuToggle = ({ toggle, isOpen }) => {
   return (
@@ -29,10 +30,31 @@ const Logo = () => {
 };
 
 const Avatar = () => {
+  const [session] = useSession();
+
+  console.dir(session);
   return (
-    <Circle size={8} bg="alura.light-blue" overflow="hidden" order={3}>
-      <Image src={'https://github.com/edukure.png'} alt="Dive logo" />
-    </Circle>
+    <>
+      {!session ? (
+        <>
+          <Button order={3} height={8} onClick={() => signIn('github')}>
+            Entrar
+          </Button>
+        </>
+      ) : (
+        <Flex order={3}>
+          <Button height={8} onClick={() => signOut()} marginRight={4}>
+            Sair
+          </Button>
+          <Circle size={8} bg="alura.light-blue" overflow="hidden">
+            <Image
+              src={session.user.image}
+              alt={`github profile picture of ${session.user.name}`}
+            />
+          </Circle>
+        </Flex>
+      )}
+    </>
   );
 };
 
@@ -108,7 +130,7 @@ const Menu = () => {
           <MenuToggle toggle={toggleMenu} isOpen={isMenuOpen} />
           {/* Logo */}
           <Logo />
-          
+
           {/* Desktop Menu */}
           <HStack
             order={2}
