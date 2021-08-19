@@ -144,7 +144,7 @@ const Menu = () => {
             color="gray.300"
           >
             {items.map((item) => (
-              <Item item={item} />
+              <Item item={item} key={item.name}/>
             ))}
           </HStack>
 
@@ -171,7 +171,7 @@ const Menu = () => {
                 color="gray.300"
               >
                 {items.map((item) => (
-                  <Item item={item} />
+                  <Item item={item} key={item.name} />
                 ))}
               </VStack>
             </Box>
