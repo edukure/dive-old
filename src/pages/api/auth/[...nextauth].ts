@@ -1,16 +1,27 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import NextAuth from 'next-auth';
+import Adapters from 'next-auth/adapters';
+import Providers from 'next-auth/providers';
+
+import Models from '../../../models';
 
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET
+      clientSecret: process.env.GITHUB_SECRET,
     }),
-    // ...add more providers here
   ],
 
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
-})
+  adapter: Adapters.TypeORM.Adapter(
+    // The first argument should be a database connection string or TypeORM config object
+    process.env.DATABASE_URL,
+    // The second argument can be used to pass custom models and schemas
+    // {
+    //   models: {
+    //     ...Adapters.TypeORM.Models,
+    //     User: Models.User,
+    //   },
+    // },
+  ),
+});
