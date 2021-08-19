@@ -17,11 +17,16 @@ export default NextAuth({
     // The first argument should be a database connection string or TypeORM config object
     process.env.DATABASE_URL,
     // The second argument can be used to pass custom models and schemas
-    // {
-    //   models: {
-    //     ...Adapters.TypeORM.Models,
-    //     User: Models.User,
-    //   },
-    // },
+    {
+      models: {
+        ...Adapters.TypeORM.Models,
+        User: Models.User,
+      },
+    },
   ),
+  
+  pages: {
+    newUser: '/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  }
+
 });

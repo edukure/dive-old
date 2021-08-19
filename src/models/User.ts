@@ -10,23 +10,25 @@ import Adapters from 'next-auth/adapters';
 */
 
 export default class User extends (<any>Adapters.TypeORM.Models.User.model) {
+  // You can extend the options in a model but you should not remove the base
+  // properties or change the order of the built-in options on the constructor
   constructor(
-    name?: string,
-    email?: string,
-    image?: string,
-    emailVerified?: Date,
-    squad?: string,
-    id_alura?: string,
-    id_discord?: string,
-    aluraUser?: string,
-    githubUser?: string,
+    name,
+    email,
+    image,
+    emailVerified,
+    githubUser,
+    aluraUser,
+    squad,
+    id_alura,
+    id_discord,
   ) {
     super(name, email, image, emailVerified);
+    this.githubUser = githubUser;
+    this.aluraUser = aluraUser;
     this.squad = squad;
     this.id_alura = id_alura;
     this.id_discord = id_discord;
-    this.aluraUser = aluraUser;
-    this.githubUser = githubUser;
   }
 }
 
@@ -37,34 +39,29 @@ export const UserSchema: Schema = {
   target: User,
   columns: {
     ...Adapters.TypeORM.Models.User.schema.columns,
-    squad: {
+    githubUser: {
       type: 'string',
       nullable: true,
-      default: null,
-    },
-    id_alura: {
-      type: 'string',
-      nullable: true,
-      default: null,
-      unique: true
-    },
-    id_discord: {
-      type: 'string',
-      nullable: true,
-      default: null,
-      unique: true
+      unique: true,
     },
     aluraUser: {
       type: 'string',
       nullable: true,
-      default: null,
-      unique: true
+      unique: true,
     },
-    githubUser: {
+    squad: {
       type: 'string',
       nullable: true,
-      default: null,
-      unique: true
+    },
+    id_alura: {
+      type: 'string',
+      nullable: true,
+      unique: true,
+    },
+    id_discord: {
+      type: 'string',
+      nullable: true,
+      unique: true,
     },
   },
 };
