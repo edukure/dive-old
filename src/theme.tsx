@@ -26,7 +26,7 @@ const theme = extendTheme({
       'inovacao-gestao': '#ff8c2a',
     },
   },
-  fonts: { body: 'Inter, sans-serif' },
+  fonts: { body: 'Inter, sans-serif', heading: 'Inter, sans-serif'},
   breakpoints,
 });
 
